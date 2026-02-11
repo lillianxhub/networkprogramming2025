@@ -415,11 +415,11 @@ The TCP ritual is not busywork. It is **protocol obedience**. Students who inter
 
 - [x] Server running in Terminal 1?
 - [x] Client can reach HOST:PORT?
-- [ ] `listen(1)` before `accept()`?
-- [ ] `recv()` handles empty messages?
-- [ ] `sendall()` not just `send()`?
-- [ ] Sockets closed before exit?
-- [ ] No encoding/decoding errors?
+- [x] `listen(1)` before `accept()`?
+- [x] `recv()` handles empty messages?
+- [x] `sendall()` not just `send()`?
+- [x] Sockets closed before exit?
+- [x] No encoding/decoding errors?
 
 ---
 
