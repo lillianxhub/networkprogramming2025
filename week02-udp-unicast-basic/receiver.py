@@ -8,11 +8,5 @@ sock.bind((HOST, PORT))
 
 while True:
     data, addr = sock.recvfrom(BUFFER_SIZE)
-    msg_id, text = data.decode().split('|', 1)
-    msg_id = int(msg_id)
-    
-    if msg_id in received_ids:
-        print(f"[RECEIVER] Duplicate: {msg_id}")
-    else:
-        received_ids.add(msg_id)
-        print(f"[RECEIVER] New: {msg_id} -> {text}")
+    print(f"[RECEIVER] Received: {data.decode()} from {addr}")
+    sock.sendto(b"ACK", addr)
