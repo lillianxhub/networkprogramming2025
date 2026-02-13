@@ -1,26 +1,13 @@
-# broadcaster.py with collection
+# broadcaster.py with periodic sending
 import socket
 import time
-from config import BROADCAST_IP, PORT, BUFFER_SIZE
+from config import BROADCAST_IP, PORT
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-sock.bind(("", PORT))  # Also listen for replies
 
-# Send broadcast
-sock.sendto(b"DISCOVERY: Who is online?", (BROADCAST_IP, PORT))
-print("[BROADCASTER] Discovery sent")
-
-# Wait for replies
-sock.settimeout(2)
-responses = []
 while True:
-    try:
-        data, addr = sock.recvfrom(BUFFER_SIZE)
-        responses.append(addr)
-        print(f"[BROADCASTER] Reply from {addr}: {data.decode()}")
-    except socket.timeout:
-        break
-
-print(f"[BROADCASTER] Total responses: {len(responses)}")
+    message = f"DISCOVERY: {time.strftime('%H:%M:%S')}"
+    sock.sendto(message.encode(), (BROADCAST_IP, PORT))
+    print(f"[BROADCASTER] Sent: {message}")
+    time.sleep(5)  # Every 5 seconds
