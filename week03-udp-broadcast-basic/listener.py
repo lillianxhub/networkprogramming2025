@@ -7,8 +7,8 @@ sock.bind(("", PORT))
 
 while True:
     data, addr = sock.recvfrom(BUFFER_SIZE)
-    print(f"[LISTENER] From {addr}: {data.decode()}")
+    print(f"[LISTENER] Received From {addr}: {data.decode()}")
     
     # Send unicast reply back to sender
-    reply = "I am online"
+    reply = f"Hello from listener at {socket.gethostname()}!"
     sock.sendto(reply.encode(), addr)
