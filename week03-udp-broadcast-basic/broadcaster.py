@@ -10,7 +10,7 @@ sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
 sock.bind(("", 0))
 
-message = b"DISCOVERY: Who is online?"
+message = b"DISCOVERY: "+socket.gethostname().encode()+b" is online"
 sock.sendto(message, (BROADCAST_IP, PORT))
 print(f"[BROADCASTER] Sent broadcast to {BROADCAST_IP}:{PORT}")
 
